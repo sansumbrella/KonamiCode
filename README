@@ -1,0 +1,1 @@
+Not yet working, just getting the idea down on paper. Thinking about two different modes: one to call an anonymous function when the code is entered (good for games), and another to load some outside content when the code is entered (good for sites that don't want size increase).
