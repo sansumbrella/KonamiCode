@@ -9,7 +9,7 @@ import flash.events.Event;
 
 import flash.ui.Keyboard;
 
-public class KonamiLayer extends Sprite {
+public class KonamiLayer extends Loader {
 	
 	/**
 	*	@author David Wicks
@@ -19,16 +19,18 @@ public class KonamiLayer extends Sprite {
 	*	addChild( new KonamiLayer("pathToKonamiContent") );
 	*	
 	*	You are free to use this code for any legal, non-malicious purpose so long as you maintain the original attribution and this notice.
+	*	It adds 676 bytes to your compiled swf (less than 1K), so you might as well throw in some easter eggs to your projects
 	*/
 	
 	private var _sequence:Array = [ Keyboard.UP, Keyboard.UP, Keyboard.DOWN, Keyboard.DOWN, Keyboard.LEFT, Keyboard.RIGHT, Keyboard.LEFT, Keyboard.RIGHT, 'B'.charCodeAt(0), 'A'.charCodeAt(0)]; //the key combination necessary to show the content
 	private var _currentIndex:int = 0;
-	private var _contentURL:String;
-	private var _content:Loader;
+	private var _konamiAction:Object;	//the function to call or the path to content (swf or image file)
 	
-	public function KonamiLayer( contentURL:String = "extra/konami.swf" )
+	public function KonamiLayer( action:Object )
 	{
 		super();
+		_konamiAction = action;
+		
 		init();
 	}
 	
@@ -47,7 +49,6 @@ public class KonamiLayer extends Sprite {
 	private function teardown(e:Event):void
 	{	//get rid of everything
 		stage.removeEventListener( KeyboardEvent.KEY_UP, handleKey );
-		_content = null;
 	}
 	
 	private function handleKey( e:KeyboardEvent ):void
@@ -69,7 +70,13 @@ public class KonamiLayer extends Sprite {
 	
 	private function doKonamiStuff():void
 	{
-		trace("KonamiLayer::doKonamiStuff()");
+		if( _konamiAction is Function )
+		{
+			(_konamiAction as Function)();
+		} else if( _konamiAction is String )
+		{
+			load( new URLRequest( _konamiAction as String ));
+		}
 	}
 	
 }

@@ -7,3 +7,4 @@ COMPILER=/Applications/Adobe\ Flex\ Builder\ 3/sdks/3.2.0/bin/mxmlc
 mv com/sansumbrella/ExtraContent.swf extra/konami.swf
 mv com/sansumbrella/Demo.swf Demo.swf
 open Demo.swf
+# open extra/konami.swf
