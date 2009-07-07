@@ -1,6 +1,11 @@
 Makes it easy to add secret content to your site/game/whatever. Just add a KonamiLayer as a child and tell it what to do or where to find your extra content.
 
-Right now, it just traces out whether someone succeeded at entering the Konami Code.
+Use it like this:
 
-To Do:
-Create two different modes: one to call an anonymous function when the code is entered (good for games), and another to load some outside content when the code is entered (good for sites that don't want size increase).
+//to call a function when the code is entered:
+addChild( new KonamiLayer( functionName ) );
+
+//to load in some outside content when the code is entered:
+addChild( new KonamiLayer( "path/to/content" ) );
+
+The KonamiLayer extends the built-in Loader class, so you can load any kind of visual content allowed by Flash (.swf, .jpg, .png, non-animated .gif)
